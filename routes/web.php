@@ -34,6 +34,8 @@ Route::delete('teams/{team}', [TeamController::class, 'destroy'])->name('teams.d
 
 Route::controller(PlayerController::class)->group(function(){
     Route::get('players', 'index')->name('players.index');
+    Route::get('players/insert', 'insert')->name('players.insert');
+    Route::post('players/store', 'store')->name('players.store');
 });
 
 
