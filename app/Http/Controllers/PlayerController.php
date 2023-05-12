@@ -43,4 +43,28 @@ class PlayerController extends Controller
         $player->save();
         return redirect()->route('players.index');
     }
+
+    public function edit($player){
+        return view('players.edit', ['player' => Player::find($player), 'teams' => Team::all()]);
+    }
+
+    public function update(Player $player, Request $request){
+
+        $request->validate([
+            'name' => 'required',
+            'surname' => 'required',
+            'birth' => 'required',
+            'market_value' => 'required',
+            'position' => 'required',
+            'team_id' => 'required',
+        ]);
+
+        $player->update($request->all());
+        return redirect()->route('players.index');
+    }
+
+    public function destroy(Player $player){
+        $player->delete();
+        return redirect()->route('players.index');
+    }
 }
