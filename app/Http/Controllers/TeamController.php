@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Team;
+use App\Models\Player;
 
 use Illuminate\Http\Request;
 
@@ -58,6 +59,15 @@ class TeamController extends Controller
         ]);
         
         $team->update($request->all());
+        return redirect()->route('teams.index');
+    }
+
+    public function view($team){
+        return view('teams.view', ['team' => Team::find($team), 'playersTeam' => Player::all()->where('team_id', $team)]); //$team = su id
+    }
+
+    public function destroy(Team $team){
+        $team->delete();
         return redirect()->route('teams.index');
     }
 }

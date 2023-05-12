@@ -25,10 +25,11 @@ Route::controller(TeamController::class)->group(function(){
     Route::post('teams/store', 'store')->name('teams.store');
     Route::post('teams/selected', 'selected')->name('teams.selected');
     Route::get('teams/{team}/edit', 'edit')->name('teams.edit');
+    Route::get('teams/{team}/view', 'view')->name('teams.view');
 });
 
 Route::put('teams/{team}', [TeamController::class, 'update'])->name('teams.update');
-
+Route::delete('teams/{team}', [TeamController::class, 'destroy'])->name('teams.destroy');
 
 
 
