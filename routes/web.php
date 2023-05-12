@@ -43,6 +43,12 @@ Route::put('players/{player}', [PlayerController::class, 'update'])->name('playe
 Route::delete('players/{player}', [PlayerController::class, 'destroy'])->name('players.destroy');
 
 
+Route::controller(GameController::class)->group(function(){
+    Route::get('games', 'index')->name('games.index');
+});
+
+
+
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
