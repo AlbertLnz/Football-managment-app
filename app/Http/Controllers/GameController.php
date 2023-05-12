@@ -31,4 +31,30 @@ class GameController extends Controller
 
         return redirect()->route('games.index');
     }
+
+    public function selected(Request $request){
+        $selectedTeam = $request->input('selectedTeam');
+        return redirect()->route('games.store', ['team' => $selectedTeam]);
+    }
+
+    public function edit($game){
+        return view('games.edit', ['game' => Game::find($game), 'teams' => Team::all()]);
+    }
+
+    public function update(Game $game, Request $request){
+
+        $request->validate([
+            'local_team_id' => 'required|different:visitant_team_id',
+            'visitant_team_id' => 'required|different:local_team_id',
+            'date' => 'required'
+        ]);
+        
+        $game->update($request->all());
+        return redirect()->route('games.index');
+    }
+
+    public function destroy(Game $game){
+        $game->delete();
+        return redirect()->route('games.index');
+    }
 }

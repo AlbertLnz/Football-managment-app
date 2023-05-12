@@ -47,7 +47,12 @@ Route::controller(GameController::class)->group(function(){
     Route::get('games', 'index')->name('games.index');
     Route::get('games/insert/{local_team}', 'insert')->name('games.insert');
     Route::post('games/store', 'store')->name('games.store');
+    Route::post('games/selected', 'selected')->name('games.selected');
+    Route::get('games/{game}/edit', 'edit')->name('games.edit');
 });
+
+Route::put('games/{game}', [GameController::class, 'update'])->name('games.update');
+Route::delete('games/{game}', [GameController::class, 'destroy'])->name('games.destroy');
 
 
 
