@@ -45,6 +45,8 @@ Route::delete('players/{player}', [PlayerController::class, 'destroy'])->name('p
 
 Route::controller(GameController::class)->group(function(){
     Route::get('games', 'index')->name('games.index');
+    Route::get('games/insert/{local_team}', 'insert')->name('games.insert');
+    Route::post('games/store', 'store')->name('games.store');
 });
 
 
