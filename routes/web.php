@@ -43,6 +43,19 @@ Route::put('players/{player}', [PlayerController::class, 'update'])->name('playe
 Route::delete('players/{player}', [PlayerController::class, 'destroy'])->name('players.destroy');
 
 
+Route::controller(GameController::class)->group(function(){
+    Route::get('games', 'index')->name('games.index');
+    Route::get('games/insert/{local_team}', 'insert')->name('games.insert');
+    Route::post('games/store', 'store')->name('games.store');
+    Route::post('games/selected', 'selected')->name('games.selected');
+    Route::get('games/{game}/edit', 'edit')->name('games.edit');
+});
+
+Route::put('games/{game}', [GameController::class, 'update'])->name('games.update');
+Route::delete('games/{game}', [GameController::class, 'destroy'])->name('games.destroy');
+
+
+
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
