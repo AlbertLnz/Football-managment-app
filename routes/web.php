@@ -21,6 +21,8 @@ Route::get('/', function () {
 
 Route::controller(TeamController::class)->group(function(){
     Route::get('teams', 'index')->name('teams.index');
+    Route::get('teams/insert', 'insert')->name('teams.insert');
+    Route::post('teams/store', 'store')->name('teams.store');
 });
 
 
