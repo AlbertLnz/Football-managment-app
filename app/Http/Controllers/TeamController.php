@@ -13,7 +13,7 @@ class TeamController extends Controller
 
         return view('teams.index', ['teams' => $teams]);
     }
-    
+
     public function insert(){
         return view('teams.insert');
     }
@@ -36,6 +36,28 @@ class TeamController extends Controller
 
         $team->save();
 
+        return redirect()->route('teams.index');
+    }
+
+    public function selected(Request $request){
+        $selectedTeam = $request->input('selectedTeam');
+        return redirect()->route('teams.view', ['team' => $selectedTeam]);
+    }
+
+    public function edit($team){
+        return view('teams.edit', ['team' => Team::find($team)]); //$team = su id
+    }
+
+    public function update(Team $team, Request $request){
+        
+        $request->validate([
+            'name' => 'required|unique:teams',
+            'country' => 'required',
+            'city' => 'required',
+            'stadium' => 'required|unique:teams',
+        ]);
+        
+        $team->update($request->all());
         return redirect()->route('teams.index');
     }
 }
